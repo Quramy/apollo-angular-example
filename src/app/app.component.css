@@ -1,0 +1,9 @@
+:host {
+  display: block;
+}
+
+.container {
+  width: 960px;
+  margin: 0 auto;
+  padding: 0 32px;
+}

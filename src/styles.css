@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+
+body, * {
+  padding: 0;
+  margin: 0;
+  color: #24242e;
+}
+
+a:link, a:hover, a:visited, a:active, a:focus {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+a:link {
+  color: #0366d6;
+}
+
+a:hover {
+  text-decoration: underline;
+}
