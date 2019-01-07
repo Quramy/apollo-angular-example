@@ -43,12 +43,36 @@ export interface RepoList_repositories_nodes {
   languages: RepoList_repositories_nodes_languages | null;
 }
 
+export interface RepoList_repositories_pageInfo {
+  __typename: "PageInfo";
+  /**
+   * When paginating forwards, are there more items?
+   */
+  hasNextPage: boolean;
+  /**
+   * When paginating forwards, the cursor to continue.
+   */
+  endCursor: string | null;
+  /**
+   * When paginating backwards, the cursor to continue.
+   */
+  startCursor: string | null;
+}
+
 export interface RepoList_repositories {
   __typename: "RepositoryConnection";
   /**
    * A list of nodes.
    */
   nodes: (RepoList_repositories_nodes | null)[] | null;
+  /**
+   * Information to aid in pagination.
+   */
+  pageInfo: RepoList_repositories_pageInfo;
+  /**
+   * Identifies the total count of items in the connection.
+   */
+  totalCount: number;
 }
 
 export interface RepoList {

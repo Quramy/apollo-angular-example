@@ -1,14 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, switchMap } from 'rxjs/operators';
 import  gql from 'graphql-tag';
 import { AppQuery } from './__generated__/AppQuery'
+import { NextCursor } from './__generated__/NextCursor'
 import { RepoListComponent } from './repo-list/repo-list.component';
+
+const nextCursor = gql`
+  query NextCursor {
+    nextCursor @client
+  }
+`;
 
 const appQuery = gql`
   ${RepoListComponent.fragment}
-  query AppQuery($last: Int) {
+  query AppQuery($first: Int!, $after: String) {
   	viewer {
       ...RepoList,
     },
@@ -35,7 +42,13 @@ export class AppComponent implements OnInit {
   constructor(private apollo: Apollo) { }
 
   ngOnInit() {
-    this.data$ = this.apollo.watchQuery<AppQuery>({ query: appQuery, variables: { last: 20 } }).valueChanges
-      .pipe(tap(x => console.log(x)), map(x => x.data));
+    this.data$ = this.apollo.watchQuery<NextCursor>({
+      query: nextCursor,
+    }).valueChanges.pipe(
+      switchMap(x => this.apollo.watchQuery<AppQuery>({
+        query: appQuery,
+        variables: { first: 20, after: x.data.nextCursor },
+      }).valueChanges)
+    ).pipe(map(x => x.data));
   }
 }

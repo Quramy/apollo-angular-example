@@ -1,0 +1,7 @@
+extend type Query {
+  nextCursor: String
+}
+
+extend type Mutation {
+  nextPage(cursor: String): String
+}
