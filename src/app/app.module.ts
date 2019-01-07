@@ -6,12 +6,14 @@ import { GraphQLModule } from '../graphql/graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { RepoItemComponent } from './repo-item/repo-item.component';
 import { RepoListComponent } from './repo-list/repo-list.component';
+import { SimplePagerComponent } from './simple-pager/simple-pager.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RepoItemComponent,
-    RepoListComponent
+    RepoListComponent,
+    SimplePagerComponent
   ],
   imports: [
     BrowserModule,

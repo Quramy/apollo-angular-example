@@ -46,6 +46,10 @@ export interface RepoList_repositories_nodes {
 export interface RepoList_repositories_pageInfo {
   __typename: "PageInfo";
   /**
+   * When paginating backwards, are there more items?
+   */
+  hasPreviousPage: boolean;
+  /**
    * When paginating forwards, are there more items?
    */
   hasNextPage: boolean;

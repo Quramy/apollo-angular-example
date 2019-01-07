@@ -1,0 +1,21 @@
+:host {
+  display: block;
+}
+
+.item {
+  cursor: pointer;
+}
+
+.item + .item {
+  margin-left: 16px;
+}
+
+.item:hover {
+  opacity: .8;
+  text-decoration: underline;
+}
+
+.disabled {
+  pointer-events: none;
+  color: #ddd;
+}

@@ -2,10 +2,13 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: NextCursor
+// GraphQL mutation operation: prevPage
 // ====================================================
 
-export interface NextCursor {
-  after: string | null;
-  before: string | null;
+export interface prevPage {
+  prevPage: string | null;
+}
+
+export interface prevPageVariables {
+  cursor?: string | null;
 }

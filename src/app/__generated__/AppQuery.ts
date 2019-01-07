@@ -46,6 +46,10 @@ export interface AppQuery_viewer_repositories_nodes {
 export interface AppQuery_viewer_repositories_pageInfo {
   __typename: "PageInfo";
   /**
+   * When paginating backwards, are there more items?
+   */
+  hasPreviousPage: boolean;
+  /**
    * When paginating forwards, are there more items?
    */
   hasNextPage: boolean;
@@ -88,9 +92,10 @@ export interface AppQuery {
    * The currently authenticated user.
    */
   viewer: AppQuery_viewer;
-  hoge: string;
 }
 
 export interface AppQueryVariables {
-  first?: number | null;
+  first: number;
+  after?: string | null;
+  before?: string | null;
 }

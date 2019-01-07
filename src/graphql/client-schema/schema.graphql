@@ -1,7 +1,9 @@
 extend type Query {
-  nextCursor: String
+  before: String
+  after: String
 }
 
 extend type Mutation {
   nextPage(cursor: String): String
+  prevPage(cursor: String): String
 }
