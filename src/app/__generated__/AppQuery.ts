@@ -97,5 +97,4 @@ export interface AppQuery {
 export interface AppQueryVariables {
   first: number;
   after?: string | null;
-  before?: string | null;
 }

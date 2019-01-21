@@ -15,7 +15,7 @@ const cursorsQuery = gql`
 
 const appQuery = gql`
   ${RepoListComponent.fragment}
-  query AppQuery($first: Int!, $after: String, $before: String) {
+  query AppQuery($first: Int!, $after: String) {
   	viewer {
       ...RepoList,
     },

@@ -9,7 +9,7 @@ import { Apollo } from 'apollo-angular';
 const fragment = gql`
   ${RepoItemComponent.fragment}
   fragment RepoList on User {
-    repositories(first: $first, after: $after, before: $before) {
+    repositories(first: $first, after: $after) {
       nodes {
         ...RepoItem,
       },
