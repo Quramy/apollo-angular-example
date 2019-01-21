@@ -1,6 +1,6 @@
 extend type Query {
-  before: String
-  after: String
+  current: String
+  stack: [String]
 }
 
 extend type Mutation {

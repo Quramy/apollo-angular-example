@@ -4,13 +4,12 @@ import { Observable } from 'rxjs';
 import { map, tap, switchMap } from 'rxjs/operators';
 import gql from 'graphql-tag';
 import { AppQuery } from './__generated__/AppQuery';
-import { NextCursor } from './__generated__/NextCursor';
+import { Cursors } from './__generated__/Cursors';
 import { RepoListComponent } from './repo-list/repo-list.component';
 
 const cursorsQuery = gql`
   query Cursors {
-    after @client
-    before @client
+    current @client
   }
 `;
 
@@ -43,13 +42,13 @@ export class AppComponent implements OnInit {
   constructor(private apollo: Apollo) { }
 
   ngOnInit() {
-    this.data$ = this.apollo.watchQuery<NextCursor>({
+    this.data$ = this.apollo.watchQuery<Cursors>({
       query: cursorsQuery,
     }).valueChanges.pipe(
       tap(x => console.log(x)),
       switchMap(x => this.apollo.watchQuery<AppQuery>({
         query: appQuery,
-        variables: { first: 20, after: x.data.after, before: x.data.before },
+        variables: { first: 20, after: x.data.current },
       }).valueChanges)
     ).pipe(map(x => x.data));
   }

@@ -2,10 +2,9 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: NextCursor
+// GraphQL query operation: Cursors
 // ====================================================
 
-export interface NextCursor {
-  after: string | null;
-  before: string | null;
+export interface Cursors {
+  current: string | null;
 }
