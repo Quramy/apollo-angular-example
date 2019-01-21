@@ -31,7 +31,7 @@ const appQuery = gql`
       Your GitHub repositories
     </h1>
     <div *ngIf="data$ | async as data">
-      <app-repo-list [fragment]="data.viewer"></app-repo-list>
+      <app-repo-list [repoList]="data.viewer"></app-repo-list>
     </div>
   </div>
   `,
@@ -45,10 +45,10 @@ export class AppComponent implements OnInit {
     this.data$ = this.apollo.watchQuery<Cursors>({
       query: cursorsQuery,
     }).valueChanges.pipe(
-      tap(x => console.log(x)),
-      switchMap(x => this.apollo.watchQuery<AppQuery>({
+      tap(x => console.log(x)), // logging for debug purpose
+      switchMap(({ data: { current } }) => this.apollo.watchQuery<AppQuery>({
         query: appQuery,
-        variables: { first: 20, after: x.data.current },
+        variables: { first: 20, after: current },
       }).valueChanges)
     ).pipe(map(x => x.data));
   }

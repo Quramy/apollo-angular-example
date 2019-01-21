@@ -40,21 +40,21 @@ const prevPage = gql`
   selector: 'app-repo-list',
   styleUrls: ['./repo-list.component.css'],
   template: `
-    <div *ngIf="fragment.repositories && fragment.repositories.nodes as repositories">
+    <div *ngIf="repoList.repositories && repoList.repositories.nodes as repositories">
       <app-simple-pager
-        [hasPrev]="fragment.repositories.pageInfo.hasPreviousPage"
-        [hasNext]="fragment.repositories.pageInfo.hasNextPage"
+        [hasPrev]="repoList.repositories.pageInfo.hasPreviousPage"
+        [hasNext]="repoList.repositories.pageInfo.hasNextPage"
         (prev)="prev()"
         (next)="next()"
       ></app-simple-pager>
       <app-repo-item
         class="item"
         *ngFor="let node of repositories"
-        [fragment]="node"
+        [repoItem]="node"
       ></app-repo-item>
       <app-simple-pager
-        [hasPrev]="fragment.repositories.pageInfo.hasPreviousPage"
-        [hasNext]="fragment.repositories.pageInfo.hasNextPage"
+        [hasPrev]="repoList.repositories.pageInfo.hasPreviousPage"
+        [hasNext]="repoList.repositories.pageInfo.hasNextPage"
         (prev)="prev()"
         (next)="next()"
       ></app-simple-pager>
@@ -63,7 +63,7 @@ const prevPage = gql`
 })
 export class RepoListComponent {
   static fragment = fragment;
-  @Input() fragment: RepoList;
+  @Input() repoList: RepoList;
 
   constructor(private apollo: Apollo) {
   }
@@ -72,7 +72,7 @@ export class RepoListComponent {
     this.apollo.mutate({
       mutation: prevPage,
       variables: {
-        cursor: this.fragment.repositories.pageInfo.startCursor,
+        cursor: this.repoList.repositories.pageInfo.startCursor,
       }
     }).subscribe();
   }
@@ -81,7 +81,7 @@ export class RepoListComponent {
     this.apollo.mutate({
       mutation: nextPage,
       variables: {
-        cursor: this.fragment.repositories.pageInfo.endCursor,
+        cursor: this.repoList.repositories.pageInfo.endCursor,
       }
     }).subscribe();
   }

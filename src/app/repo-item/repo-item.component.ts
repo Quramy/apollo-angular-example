@@ -20,14 +20,14 @@ const fragment = gql`
   template: `
     <section>
       <header class="title">
-        <a [href]="fragment.url" targe="_blank">
-          {{fragment.name}}
+        <a [href]="repoItem.url" targe="_blank">
+          {{repoItem.name}}
         </a>
       </header>
-      <p class="desc" *ngIf="fragment.description">{{fragment.description}}</p>
-      <p class="desc" *ngIf="!fragment.description">(no description)</p>
-      <ul class="langs" *ngIf="fragment.languages.nodes">
-        <li class="lang-label" *ngFor="let lang of fragment.languages.nodes">
+      <p class="desc" *ngIf="repoItem.description">{{repoItem.description}}</p>
+      <p class="desc" *ngIf="!repoItem.description">(no description)</p>
+      <ul class="langs" *ngIf="repoItem.languages.nodes">
+        <li class="lang-label" *ngFor="let lang of repoItem.languages.nodes">
           {{lang.name}}
         </li>
       </ul>
@@ -36,5 +36,5 @@ const fragment = gql`
 })
 export class RepoItemComponent {
   static fragment = fragment;
-  @Input() fragment: RepoItem;
+  @Input() repoItem: RepoItem;
 }
